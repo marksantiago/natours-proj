@@ -1,0 +1,111 @@
+.form {
+
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-family: inherit; // font properties not inherited, override browser default form stylings manually
+    font-size: 1.5rem;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 300ms;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, .1); // for accessability, since we removed `outline`
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    &:-ms-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    &::-ms-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    &::placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem; // positioned exactly as input's horizontal padding which is 2rem
+    margin-top: .7rem;
+    display: block; // in order to apply box-model properties on this element
+    transition: all 300ms;
+  }
+
+  &__input:placeholder-shown + &__label {
+    opacity: 0; // when placeholder text is shown (field empty), set label to invisible
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+
+  // RADIO BUTTONS
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    padding-left: 4.5rem;
+    position: relative;
+  }
+
+  &__radio-button { // decorative radio button outer circle
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: -4px;
+    left: 0;
+
+    &::after { // inner circle
+      content: '';
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 200ms;
+    }
+
+  }
+
+  &__radio-input:checked + &__radio-label &__radio-button::after { // As soon as we hit label element, radio input becomes checked
+    opacity: 1;
+  }
+
+}
