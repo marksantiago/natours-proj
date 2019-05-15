@@ -6,22 +6,35 @@
   box-sizing: inherit;
 }
 
+/*
+Base font size, assume browser default font-size ~= 16px
+
+1rem = 16px / 16px * 100  = 100%    (1rem = 16px)
+--------------------------------
+1rem = 12px / 16px * 100   = 75%    (1rem = 12px)
+--------------------------------
+1rem = 10px / 16px * 100 = 62.5%    (1rem = 10px)
+--------------------------------
+1rem = 9px / 16px * 100 = 56.25%    (1rem = 9px)
+--------------------------------
+1rem = 8px / 16px * 100    = 50%    (1rem = 8px)
+*/
 html {
-  font-size: 62.5%;                 // 10 / 16 * 100 = 62.5 (This defines what 1rem is)
+  font-size: 62.5%;                                   // 10px
 
-  @include respond(tab-land) {
-    font-size: 56.25%;              // 9 / 16 = 56.25%
-  }
+  @include respond(tab-land) { font-size: 56.25%; }   // 9px
 
-  @include respond(tab-port) {
-    font-size: 50%;                 // 8 / 16 = 50%... (let smaller mq win)
-  }
+  @include respond(tab-port) { font-size: 50%; }      // 8px (let smaller mq win)
 
-  @include respond(big-desktop) {
-    font-size: 75%;                 // 12 / 16 = 75%
-  }
+  @include respond(big-desktop) { font-size: 75%; }   // 12px
+
 }
 
 body {
   box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
 }
