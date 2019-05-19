@@ -14,9 +14,9 @@
     left: 0;
     width: 100%; // will occupy only as much as content, so give full width of column container
     backface-visibility: hidden;
-    border-radius: 3px;
-    overflow: hidden; // clip excess background image to expose rounded corners
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    overflow: hidden; // clip excess background image to expose rounded corners
+    border-radius: $default-border-radius;
 
     &--front {
       background-color: $color-white;
@@ -62,7 +62,6 @@
     transform: rotateY(0); // rotate to front
   }
 
-
   // FRONT SIDE STYLING
   &__picture {
     background-size: cover;
@@ -70,37 +69,37 @@
     background-blend-mode: screen;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    border-top-left-radius: 3px; // manually re-apply border-radius broken by clip-path
-    border-top-right-radius: 3px;
+    border-top-left-radius: $default-border-radius; // manually re-apply border-radius broken by clip-path
+    border-top-right-radius: $default-border-radius;
 
     &--1 {
       background-image:
         linear-gradient(
-          to right bottom, 
+          to right bottom,
           $color-secondary-light,
           $color-secondary-dark
         ),
-        url(../img/nat-5.jpg); // PATH to ./img/ coming from ./css/style.css after compile
+        url('../img/nat-5.jpg'); // PATH to ./img/ coming from ./css/style.css after compile
     }
 
     &--2 {
       background-image:
         linear-gradient(
-          to right bottom, 
+          to right bottom,
           $color-primary-light,
           $color-primary-dark
         ),
-        url(../img/nat-6.jpg);
+        url('../img/nat-6.jpg');
     }
 
     &--3 {
       background-image:
         linear-gradient(
-          to right bottom, 
+          to right bottom,
           $color-tertiary-light,
           $color-tertiary-dark
         ),
-        url(../img/nat-7.jpg);
+        url('../img/nat-7.jpg');
     }
   }
 
@@ -169,7 +168,6 @@
     }
   }
 
-
   // BACK SIDE STYLING
   &__cta {
     position: absolute;
@@ -181,7 +179,6 @@
   }
 
   &__price-box {
-    // text-align: center;
     color: $color-white;
     margin-bottom: 8rem;
   }
@@ -197,221 +194,61 @@
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   @include respond(tab-port) {
-    
-    height: 52rem;
-    
+    height: auto;
+    background-color: $color-white;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+    border-radius: $default-border-radius; // apply `border-radius` also to parent elem to fix browser rendering incosistencies
 
     &__side {
-      height: 52rem;
-      transition: all 800ms ease;
-      position: absolute; // stack both sides on top of each other
-      top: 0;
-      left: 0;
-      width: 100%; // will occupy only as much as content, so give full width of column container
-      backface-visibility: hidden;
-      border-radius: 3px;
-      overflow: hidden; // clip excess background image to expose rounded corners
-      box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+      height: auto;
+      transition: none; // disable transition
+      position: relative; // we no longer have two sides occupying the same space
+      box-shadow: none; // reset to initial value
 
       &--front {
-        background-color: $color-white;
+        background-color: transparent; // reset to initial value
       }
 
       &--back {
-        transform: rotateY(180deg); // initially rotated to back (right-wise)
-
-        &-1 {
-          background-image:
-            linear-gradient(
-              to right bottom,
-              $color-secondary-light,
-              $color-secondary-dark
-            );
-        }
-
-        &-2 {
-          background-image:
-            linear-gradient(
-              to right bottom,
-              $color-primary-light,
-              $color-primary-dark
-            );
-        }
-
-        &-3 {
-          background-image:
-            linear-gradient(
-              to right bottom,
-              $color-tertiary-light,
-              $color-tertiary-dark
-            );
-        }
+        transform: rotateY(0); // reset to initial value
+        -webkit-clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        border-top-right-radius: 0; // remove top border-radius since this is no longer a corner
       }
     }
 
     &:hover &__side--front {
-      transform: rotateY(-180deg); // rotate to back (left-wise)
-    }
+      transform: rotateY(0); // reset to initial value
 
-    &:hover &__side--back {
-      transform: rotateY(0); // rotate to front
     }
-
 
     // FRONT SIDE STYLING
-    &__picture {
-      background-size: cover;
-      height: 23rem; // will occupy only as much as content so provide some height
-      background-blend-mode: screen;
-      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-      border-top-left-radius: 3px; // manually re-apply border-radius broken by clip-path
-      border-top-right-radius: 3px;
-
-      &--1 {
-        background-image:
-          linear-gradient(
-            to right bottom, 
-            $color-secondary-light,
-            $color-secondary-dark
-          ),
-          url(../img/nat-5.jpg); // PATH to ./img/ coming from ./css/style.css after compile
-      }
-
-      &--2 {
-        background-image:
-          linear-gradient(
-            to right bottom, 
-            $color-primary-light,
-            $color-primary-dark
-          ),
-          url(../img/nat-6.jpg);
-      }
-
-      &--3 {
-        background-image:
-          linear-gradient(
-            to right bottom, 
-            $color-tertiary-light,
-            $color-tertiary-dark
-          ),
-          url(../img/nat-7.jpg);
-      }
-    }
-
     &__heading {
-      font-size: 2.8rem;
-      font-weight: 300;
-      text-transform: uppercase;
-      text-align: right;
-      color: $color-white;
-      position: absolute;
-      top: 12rem;
-      right: 2rem;
-      width: 75%; // make block narrower
-    }
-
-    &__heading-span {
-      padding: 1rem 1.5rem;
-      -webkit-box-decoration-break: clone;
-              box-decoration-break: clone; // treat as if two lines
-
-      &--1 {
-        background-image:
-          linear-gradient(
-            to right bottom,
-            rgba($color-secondary-light, .85),
-            rgba($color-secondary-dark, .85)
-          );
-      }
-
-      &--2 {
-        background-image:
-          linear-gradient(
-            to right bottom,
-            rgba($color-primary-light, .85),
-            rgba($color-primary-dark, .85)
-          );
-      }
-
-      &--3 {
-        background-image:
-          linear-gradient(
-            to right bottom,
-            rgba($color-tertiary-light, .85),
-            rgba($color-tertiary-dark, .85)
-          );
-      }
+      width: 60%;
     }
 
     &__details {
-      padding: 3rem;
-
-      ul {
-        list-style: none;
-        width: 80%;
-        margin: 0 auto;
-
-        li {
-          text-align: center;
-          font-size: 1.5rem;
-          padding: 1rem;
-
-          &:not(:last-child) {
-            border-bottom: 1px solid $color-grey-light-2;
-          }
-        }
-      }
+      padding: 1rem 3rem;
     }
-
 
     // BACK SIDE STYLING
     &__cta {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      text-align: center;
+      position: relative;
+      top: 0; // reset to initial value
+      left: 0; // reset to initial value
+      transform: translate(0); // reset to initial value
+      width: 100%; // reset to full width
+      padding: 7rem 4rem 4rem;
     }
 
     &__price-box {
-      // text-align: center;
-      color: $color-white;
-      margin-bottom: 8rem;
-    }
-
-    &__price-only {
-      font-size: 1.4rem;
-      text-transform: uppercase;
+      margin-bottom: 3rem;
     }
 
     &__price-value {
-      font-size: 6rem;
-      font-weight: 100;
+      font-size: 4rem;
     }
   }
-
-
-
-
-
 
 }

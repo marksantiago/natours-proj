@@ -24,6 +24,21 @@
     opacity: 0; // initial state scaled down and invisible
     transform: translate(-50%, -50%) scale(.25); // re-declare `translate()` from our @mixin so not overwritten
     transition: all 500ms 200ms; // we add a short `transition-delay`
+
+    @include respond(tab-port) {
+      display: block;
+    }
+
+    @include respond(phone) {
+      height: 80vh;
+    }
+
+    // 495px
+    @media (max-width: 30.9375em) {
+      width: 90vw;
+      height: 90vh;
+    }
+
   }
 
   // Equal height columns using CSS tables trick
@@ -32,6 +47,13 @@
   &__left {
     width: 33.333333%;
     display: table-cell;
+
+    @include respond(tab-port) {
+      width: 100%; // put img stacked on top of text
+      display: block;
+      text-align: center;
+    }
+
   }
 
   &__right {
@@ -39,11 +61,35 @@
     display: table-cell;
     vertical-align: middle;
     padding: 3rem 5rem;
+
+    @include respond(tab-port) {
+      width: 100%; // put text stacked below img
+      display: block;
+    }
+
   }
 
   &__img {
     display: block;
     width: 100%;
+
+    @include respond(tab-port) {
+      display: inline-block; // put images along the same row
+      width: 40%;
+      vertical-align: middle; // vertically align both images if unequal height
+    }
+
+    @include respond(phone) {
+      width: 35%; // scale down images
+      margin: 3rem auto; // align images on same row as close button
+    }
+
+    // 360px
+    @media (max-width: 22.5em) {
+      width: 22%;
+      margin: 3rem auto 0; // remove bottom margin
+    }
+
   }
 
   &__text {
@@ -65,6 +111,22 @@
     -webkit-hyphens: auto;
         -ms-hyphens: auto;
             hyphens: auto;
+
+    
+    @include respond(phone) {
+      font-size: 1.6rem;
+
+      -webkit-column-count: auto; // remove column properties, reset all to initial values
+         -moz-column-count: auto;
+              column-count: auto;
+      -webkit-column-gap: normal;
+         -moz-column-gap: normal;
+              column-gap: normal;
+      -webkit-column-rule: medium none currentColor;
+         -moz-column-rule: medium none currentColor;
+              column-rule: medium none currentColor;
+    }
+
   }
 
 

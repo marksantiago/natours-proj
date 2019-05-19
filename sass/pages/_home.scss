@@ -79,16 +79,47 @@
       rgba($color-white, .9) 50%,
       transparent 50%
     ),
-    url(../img/nat-10.jpg);
-  background-size: 100%; // same thing as `cover`
+    url('../img/nat-10.jpg');
+  background-size: 100%; // similar to `cover`, ensures entire img occupies container; `100% auto` implied, second value: height
   border-radius: $default-border-radius;
   box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
 
-  height: 50rem;
+  @include respond(tab-land) {
+    // increase form container to 65%
+    background-image:
+      linear-gradient(
+        105deg,
+        rgba($color-white, .9) 0%,
+        rgba($color-white, .9) 65%,
+        transparent 65%
+      ),
+      url('../img/nat-10.jpg');
+    background-size: cover; // ensures entire img occupies container, zooms in if needed so no empty gaps, may crop excess but maintains aspect ratio
+  }
+
+  @include respond(tab-port) {
+    // make form occupy full width of container and place img underneath in background
+    background-image:
+      linear-gradient(
+        to right,
+        rgba($color-white, .9) 0%,
+        rgba($color-white, .9) 100%
+      ),
+      url('../img/nat-10.jpg');
+  }
 
   &__form {
     width: 50%;
     padding: 6rem;
+
+    @include respond(tab-land) {
+      width: 65%; // increase width of form to 65% on smaller devices
+    }
+
+    @include respond(tab-port) {
+      width: 100%; // make form full width of container
+    }
+
   }
 
 }

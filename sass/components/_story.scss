@@ -9,6 +9,16 @@
   font-size: $default-font-size;
   transform: skewX(-12deg);
 
+  @include respond(tab-port) {
+    width: 100%; // give it more space
+    padding: 4rem; // decrease padding
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0); // reset to initial value
+  }
+
   &__shape {
     width: 15rem;
     height: 15rem;
@@ -20,6 +30,11 @@
             clip-path: circle(50% at 50% 50%);
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0); // reset `skewX()` to initial value
+    }
+
   }
 
   &__img {
@@ -27,10 +42,20 @@
     transform: translateX(-4rem) scale(1.4);
     transition: all 500ms;
     backface-visibility: hidden; // flickering fix
+
+    @include respond(tab-port) {
+      transition: none; // disable transition
+    }
+
   }
 
   &__text {
     transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0); // reset to initial value
+    }
+
   }
 
   &__caption {
@@ -45,6 +70,14 @@
     opacity: 0;
     transition: all 500ms;
     backface-visibility: hidden; // flickering fix
+
+    @include respond(tab-port) {
+      font-size: 2rem; // increase `font-size` just a bit
+      transition: none; // disable transition
+      opacity: 1; // keep caption visible at all times
+      transform: translate(-50%, -50%); // keep it at center of img at all times
+    }
+
   }
 
   &:hover &__caption {
@@ -55,6 +88,12 @@
   &:hover &__img {
     transform: translateX(-4rem) scale(1);
     filter: blur(3px) brightness(80%);
+
+    @include respond(tab-port) {
+      transform: translateX(-4rem) scale(1.4); // keep img scaled the same if clicked on smaller devices
+      filter: none; // reset to initial value
+    }
+
   }
 
 }
