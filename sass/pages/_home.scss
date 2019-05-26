@@ -17,10 +17,20 @@
       rgba($color-primary-light, .8),
       rgba($color-primary-dark, .8)
     ),
-    url('../img/nat-4.jpg');
+    url('../img/nat-4-small.jpg');
   background-size: cover;
   margin-top: -10rem;
   transform: skewY(-7deg);
+
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+    background-image:
+      linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, .8),
+        rgba($color-primary-dark, .8)
+      ),
+      url('../img/nat-4.jpg');
+  }
 
   @include respond(tab-port) {
     padding: 10rem 0;
@@ -79,10 +89,22 @@
       rgba($color-white, .9) 50%,
       transparent 50%
     ),
-    url('../img/nat-10.jpg');
+    url('../img/nat-10-small.jpg');
   background-size: 100%; // similar to `cover`, ensures entire img occupies container; `100% auto` implied, second value: height
   border-radius: $default-border-radius;
   box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+
+  @media (min-resolution: 192dpi),
+         (min-width: 125em) {
+    background-image:
+    linear-gradient(
+      105deg,
+      rgba($color-white, .9) 0%,
+      rgba($color-white, .9) 50%,
+      transparent 50%
+    ),
+    url('../img/nat-10.jpg');
+  }
 
   @include respond(tab-land) {
     // increase form container to 65%
@@ -93,8 +115,20 @@
         rgba($color-white, .9) 65%,
         transparent 65%
       ),
-      url('../img/nat-10.jpg');
+      url('../img/nat-10-small.jpg');
     background-size: cover; // ensures entire img occupies container, zooms in if needed so no empty gaps, may crop excess but maintains aspect ratio
+
+    @media (min-resolution: 192dpi) {
+      background-image:
+      linear-gradient(
+        105deg,
+        rgba($color-white, .9) 0%,
+        rgba($color-white, .9) 65%,
+        transparent 65%
+      ),
+      url('../img/nat-10.jpg');
+    }
+
   }
 
   @include respond(tab-port) {
@@ -105,8 +139,21 @@
         rgba($color-white, .9) 0%,
         rgba($color-white, .9) 100%
       ),
-      url('../img/nat-10.jpg');
+      url('../img/nat-10-small.jpg');
+    
+    @media (min-resolution: 192dpi)
+       and (min-width: 37.5em) {
+      background-image:
+        linear-gradient(
+          to right,
+          rgba($color-white, .9) 0%,
+          rgba($color-white, .9) 100%
+        ),
+        url('../img/nat-10.jpg');
+    }
+
   }
+
 
   &__form {
     width: 50%;
