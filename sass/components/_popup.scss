@@ -13,6 +13,7 @@
 
   &__content {
     @include absCenter;
+
     width: 75%;
     background-color: $color-white;
     box-shadow: 0 2rem 4rem rgba($color-black, .2);
@@ -25,18 +26,16 @@
     transform: translate(-50%, -50%) scale(.25); // re-declare `translate()` from our @mixin so not overwritten
     transition: all 500ms 200ms; // we add a short `transition-delay`
 
+    @include respond(tab-land) {
+      display: block; // we no longer need `table`
+    }
+
     @include respond(tab-port) {
-      display: block;
+      width: 85%; // increase width on smaller screens to allow more space for content
     }
 
     @include respond(phone) {
-      height: 80vh;
-    }
-
-    // 495px
-    @media (max-width: 30.9375em) {
-      width: 90vw;
-      height: 90vh;
+      width: 95%; // increase width even further for mobile screens
     }
 
   }
@@ -48,10 +47,15 @@
     width: 33.333333%;
     display: table-cell;
 
-    @include respond(tab-port) {
-      width: 100%; // put img stacked on top of text
-      display: block;
-      text-align: center;
+    @include respond(tab-land) {
+      width: 100%;
+      display: inline-block; // we no longer need `table-cell`, but `inline-block` so we can manipulate img element size
+      text-align: center; // horizontally center imgs
+      margin-top: 2.5rem; // vertically align to close icon
+    }
+
+    @include respond(phone) {
+      display: none; // remove images altogether on very small screens
     }
 
   }
@@ -62,9 +66,13 @@
     vertical-align: middle;
     padding: 3rem 5rem;
 
+    @include respond(tab-land) {
+      width: 100%;
+      display: inline-block; // inline-block so we can use vertical-align property to center things
+    }
+
     @include respond(tab-port) {
-      width: 100%; // put text stacked below img
-      display: block;
+      padding: 2.5rem; // align to same padding as close icon on smaller screen to decrease overall padding
     }
 
   }
@@ -73,21 +81,24 @@
     display: block;
     width: 100%;
 
+    @include respond(tab-land) {
+      width: 40%; // each image will take at least 50% width, anything greater they break to new line; 40% looks good here
+      display: inline-block; // so we can stack image side by side, no new lines
+      vertical-align: middle; // just in case each image has different height, at least they are vertically centered
+
+      &:not(:last-child) {
+        margin-right: 5rem; // gap between images
+      }
+
+    }
+
     @include respond(tab-port) {
-      display: inline-block; // put images along the same row
-      width: 40%;
-      vertical-align: middle; // vertically align both images if unequal height
-    }
+      width: 35%;
 
-    @include respond(phone) {
-      width: 35%; // scale down images
-      margin: 3rem auto; // align images on same row as close button
-    }
+      &:not(:last-child) {
+        margin-right: 7rem; // increase gap between two images and align along outer-padding up to 600px screen width
+      }
 
-    // 360px
-    @media (max-width: 22.5em) {
-      width: 22%;
-      margin: 3rem auto 0; // remove bottom margin
     }
 
   }
@@ -112,11 +123,11 @@
         -ms-hyphens: auto;
             hyphens: auto;
 
-    
-    @include respond(phone) {
+    @include respond(tab-port) {
       font-size: 1.6rem;
+      margin-bottom: 2rem;
 
-      -webkit-column-count: auto; // remove column properties, reset all to initial values
+      -webkit-column-count: auto; // remove column properties on smaller screens, reset all to initial values
          -moz-column-count: auto;
               column-count: auto;
       -webkit-column-gap: normal;
@@ -125,6 +136,10 @@
       -webkit-column-rule: medium none currentColor;
          -moz-column-rule: medium none currentColor;
               column-rule: medium none currentColor;
+    }
+
+    @include respond(phone) {
+      font-size: 1.8rem; // increase font-size to make text more readable on mobile screens
     }
 
   }
