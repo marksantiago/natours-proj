@@ -11,6 +11,13 @@
   visibility: hidden;
   transition: all 300ms;
 
+  @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+    // currently only works on Safari
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    background-color: rgba($color-black, .3);
+  }
+
   &__content {
     @include absCenter;
 
@@ -54,8 +61,15 @@
       margin-top: 2.5rem; // vertically align to close icon
     }
 
+    // landscape
+    @media (min-width: 375px)
+       and (max-width: 667px)
+       and (orientation: landscape) {
+      display: none;
+    }
+
     @include respond(phone) {
-      display: none; // remove images altogether on very small screens
+      display: none;
     }
 
   }

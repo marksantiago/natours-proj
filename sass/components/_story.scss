@@ -23,13 +23,27 @@
     width: 15rem;
     height: 15rem;
     float: left;
-    -webkit-shape-outside: circle(50% at 50% 50%); // `shape-outside` requires float and dimensions
-            shape-outside: circle(50% at 50% 50%);
-
-    -webkit-clip-path: circle(50% at 50% 50%);
-            clip-path: circle(50% at 50% 50%);
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+
+
+    // fallbacks for when `clip-path` property unsupported
+    overflow: hidden; // so img don't overflow container
+    border-radius: 50%; // makes container round
+
+    @supports (clip-path: circle(50% at 50% 50%)) or
+              (-webkit-clip-path: circle(50% at 50% 50%))
+    {
+      -webkit-clip-path: circle(50% at 50% 50%);
+              clip-path: circle(50% at 50% 50%);
+
+      // Text wrapping around shapes only useful if `clip-path` property supported, otherwise, fallbacks to box-model
+      -webkit-shape-outside: circle(50% at 50% 50%); // `shape-outside` requires float and dimensions
+              shape-outside: circle(50% at 50% 50%);
+      overflow: visible; // reset to initial
+      border-radius: 0; // reset to initial
+    }
+
 
     @include respond(phone) {
       transform: translateX(-3rem) skewX(0); // reset `skewX()` to initial value
