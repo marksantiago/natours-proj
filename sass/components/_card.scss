@@ -82,9 +82,9 @@
         ),
         url('../img/nat-5-small.jpg'); // PATH to ./img/ coming from ./css/style.css after compile
 
-      @media (min-resolution: 192dpi) and (min-width: 37.5em),
-             (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
-             (min-width: 125em) {
+      @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+             only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+             only screen and (min-width: 125em) {
         background-image:
           linear-gradient(
             to right bottom,
@@ -105,9 +105,9 @@
         ),
         url('../img/nat-6-small.jpg');
 
-      @media (min-resolution: 192dpi) and (min-width: 37.5em),
-             (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
-             (min-width: 125em) {
+      @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+             only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+             only screen and (min-width: 125em) {
         background-image:
           linear-gradient(
             to right bottom,
@@ -128,9 +128,9 @@
         ),
         url('../img/nat-7-small.jpg');
 
-      @media (min-resolution: 192dpi) and (min-width: 37.5em),
-             (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
-             (min-width: 125em) {
+      @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+             only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+             only screen and (min-width: 125em) {
         background-image:
           linear-gradient(
             to right bottom,
@@ -234,7 +234,9 @@
   }
 
 
-  @include respond(tab-port) {
+  // Disable Card hover animation for smaller devices or touch screen devices
+  @media only screen and (max-width: 56.25em),
+         only screen and (hover: none) {
     height: auto;
     background-color: $color-white;
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
