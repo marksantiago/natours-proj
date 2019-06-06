@@ -6,11 +6,17 @@ Natours is a demo website built by Jonas Schmedtmann for his Udemy's online cour
 
 ### 1. Have at least [node](https://nodejs.org/en/) `v6.x.x` installed.
 
-### 2. Clone this repo:
+### 2. Install [live-server](https://www.npmjs.com/package/live-server) globally
+
+`npm install -g live-server`
+
+### 3. Clone this repo:
 
 `git clone https://github.com/marksantiago/natours-proj.git`
 
-### 3. Install everything in `package.json`:
+`cd natours-proj`
+
+### 4. Install everything in `package.json`:
 
 `npm install`
 
